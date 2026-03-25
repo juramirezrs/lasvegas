@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Vegas 2026 · Familia Juanes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F5D98B;
+    --gold-pale: #FDF6E3;
+    --dark: #1A1410;
+    --dark2: #2E2416;
+    --red: #CC2B2B;
+    --red-light: #E84545;
+    --teal: #1B7A6E;
+    --teal-light: #2DBCAA;
+    --cream: #FAF6EF;
+    --text: #2C1F0F;
+    --text-muted: #7A6A55;
+    --border: #E8DCC8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 40px 60px;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  }
+  .hero-lights {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red), var(--gold), var(--teal-light), var(--gold), var(--red));
+    animation: shimmer 3s linear infinite;
+    background-size: 200% 100%;
+  }
+  @keyframes shimmer { to { background-position: 200% center; } }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 90px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    position: relative;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 22px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+  }
+  .hero-familia {
+    margin-top: 32px;
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .member-pill {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .hero-dates {
+    margin-top: 24px;
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ====== NAV TABS ====== */
+  .tabs-bar {
+    background: var(--dark2);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .tab-btn {
+    padding: 14px 28px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.8); }
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  /* ====== SECTION WRAPPER ====== */
+  .section-wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .section-title span { color: var(--gold); }
+  .section-subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 48px;
+  }
+
+  /* ====== CALENDAR ====== */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: 70px repeat(6, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    font-size: 12px;
+    background: #fff;
+  }
+  .cal-header {
+    background: var(--dark);
+    color: #fff;
+    text-align: center;
+    padding: 12px 4px;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cal-header.day-num {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .cal-header .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .cal-time-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .cal-time-slot {
+    height: 48px;
+    display: flex;
+    align-items: flex-start;
+    padding: 4px 8px;
+    color: var(--text-muted);
+    font-size: 10px;
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.5px;
+  }
+  .cal-day-col {
+    border-left: 1px solid var(--border);
+    position: relative;
+    min-height: 576px;
+  }
+  .cal-slot {
+    height: 48px;
+    border-top: 1px solid rgba(0,0,0,0.04);
+  }
+  .cal-event {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+    overflow: hidden;
+    cursor: default;
+  }
+  .ev-flight { background: #FFE4E4; color: #8B2020; border-left: 3px solid #CC2B2B; }
+  .ev-hotel { background: #E8DEFF; color: #3D2080; border-left: 3px solid #7C4DFF; }
+  .ev-activity { background: #D4F4EE; color: #0A5447; border-left: 3px solid #1B7A6E; }
+  .ev-restaurant { background: #FFEFC2; color: #7A4B00; border-left: 3px solid #C9A84C; }
+  .cal-all-day {
+    background: #E8DEFF;
+    color: #3D2080;
+    padding: 6px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    border-left: 3px solid #7C4DFF;
+    grid-column: 2 / 8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cal-time-header { background: var(--dark); }
+
+  /* ====== ITINERARY ====== */
+  .day-card {
+    margin-bottom: 48px;
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .day-number {
+    background: var(--dark);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .day-date {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .stops-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .stop-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 20px;
+    position: relative;
+  }
+  .stop-item:not(:last-child) .stop-line { display: block; }
+  .stop-time-col {
+    text-align: right;
+    padding-top: 4px;
+  }
+  .stop-time {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .stop-dist {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+  }
+  .stop-content-col { padding-bottom: 24px; position: relative; }
+  .stop-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: #fff;
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    z-index: 2;
+  }
+  .stop-vline {
+    position: absolute;
+    left: -20px;
+    top: 17px;
+    bottom: -12px;
+    width: 0;
+    border-left: 1.5px dashed var(--border);
+  }
+  .stop-name {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--dark);
+  }
+  .stop-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .stop-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 6px;
+  }
+  .badge-free { background: #D4F4EE; color: #0A5447; }
+  .badge-paid { background: #FFE4E4; color: #8B2020; }
+  .badge-hotel { background: #E8DEFF; color: #3D2080; }
+  .badge-food { background: #FFEFC2; color: #7A4B00; }
+  .badge-flight { background: #FFE4E4; color: #8B2020; }
+
+  .stops-list { padding-left: 26px; }
+
+  /* ====== CHECKLIST ====== */
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 640px) { .checklist-grid { grid-template-columns: 1fr; } }
+  .check-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .check-card-header {
+    padding: 16px 20px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .check-card-header .icon {
+    font-size: 18px;
+  }
+  .check-list {
+    padding: 12px 0;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .check-item:hover { background: var(--gold-pale); }
+  .check-item input[type=checkbox] {
+    margin-top: 2px;
+    accent-color: var(--gold);
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .check-item label {
+    font-size: 13.5px;
+    color: var(--text);
+    cursor: pointer;
+    line-height: 1.5;
+  }
+  .check-item label.checked {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+  .check-section-label {
+    padding: 8px 20px 4px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .check-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 20px;
+  }
+  .paid-item { color: var(--red); }
+
+  /* ====== MAP ====== */
+  .map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    height: 560px;
+    background: #e8e0d5;
+    position: relative;
+  }
+  #map { width: 100%; height: 100%; }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  footer strong { color: var(--gold); }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 700px) {
+    .calendar-grid { font-size: 9px; }
+    .tab-btn { padding: 12px 14px; font-size: 10px; letter-spacing: 0.5px; }
+    .hero { padding: 60px 20px 40px; }
+    .section-wrap { padding: 40px 16px; }
+    .checklist-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-lights"></div>
+  <p class="hero-eyebrow">✦ Viaje Familiar ✦ Abril 2026 ✦</p>
+  <h1>Las <span>Vegas</span></h1>
+  <p class="hero-sub">6 días de diversión, shows, arte y aventura</p>
+  <div class="hero-familia">
+    <span class="member-pill">Juanes</span>
+    <span class="member-pill">Juanjo</span>
+    <span class="member-pill">Yali</span>
+    <span class="member-pill">Oscar</span>
+  </div>
+  <p class="hero-dates">1 – 6 Abril, 2026 &nbsp;·&nbsp; Club Wyndham Grand Desert</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('calendario')">📅 Calendario</button>
+  <button class="tab-btn" onclick="switchTab('itinerario')">🗺️ Itinerario</button>
+  <button class="tab-btn" onclick="switchTab('checklist')">✅ Checklist</button>
+  <button class="tab-btn" onclick="switchTab('mapa')">📍 Mapa</button>
+</div>
+
+<!-- ==============================
+     TAB 1: CALENDARIO
+================================ -->
+<div class="tab-section active" id="tab-calendario">
+<div class="section-wrap">
+  <h2 class="section-title">Vista de <span>Calendario</span></h2>
+  <p class="section-subtitle">Abr 1 – 6, 2026 · 6 días en Las Vegas</p>
+
+  <div class="calendar-grid">
+    <!-- Header row -->
+    <div class="cal-header cal-time-header" style="padding:12px 4px;">
+      <div style="font-size:9px;color:rgba(255,255,255,0.4)">Hora</div>
+    </div>
+    <div class="cal-header day-num"><span style="font-size:9px;color:rgba(255,255,255,0.5)">MIÉ</span><span class="num">1</span></div>
+    <div class="cal-header day-num"><span style="font-size:9px;color:rgba(255,255,255,0.5)">JUE</span><span class="num">2</span></div>
+    <div class="cal-header day-num"><span style="font-size:9px;color:rgba(255,255,255,0.5)">VIE</span><span class="num">3</span></div>
+    <div class="cal-header day-num"><span style="font-size:9px;color:rgba(255,255,255,0.5)">SÁB</span><span class="num">4</span></div>
+    <div class="cal-header day-num"><span style="font-size:9px;color:rgba(255,255,255,0.5)">DOM</span><span class="num">5</span></div>
+    <div class="cal-header day-num"><span style="font-size:9px;color:rgba(255,255,255,0.5)">LUN</span><span class="num">6</span></div>
+
+    <!-- All-day row -->
+    <div class="cal-header" style="background:#1A1410;font-size:10px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:8px 4px;">todo el día</div>
+    <div class="cal-all-day" style="background:#2A1F44;color:#C4B0FF;border-left:3px solid #7C4DFF;padding:8px;font-size:10px;grid-column:2/7;">🏨 Club Wyndham Grand Desert — 5 noches</div>
+    <div style="background:#1A1410;border-left:1px solid rgba(201,168,76,0.1);"></div>
+
+    <!-- Time slots: 7am–11pm = 16 slots -->
+    <!-- Each slot = 48px height -->
+    <!-- We'll do a relative-positioned approach per day column -->
+    <div class="cal-time-col">
+      <div class="cal-time-slot">7am</div>
+      <div class="cal-time-slot">8am</div>
+      <div class="cal-time-slot">9am</div>
+      <div class="cal-time-slot">10am</div>
+      <div class="cal-time-slot">11am</div>
+      <div class="cal-time-slot">12pm</div>
+      <div class="cal-time-slot">1pm</div>
+      <div class="cal-time-slot">2pm</div>
+      <div class="cal-time-slot">3pm</div>
+      <div class="cal-time-slot">4pm</div>
+      <div class="cal-time-slot">5pm</div>
+      <div class="cal-time-slot">6pm</div>
+      <div class="cal-time-slot">7pm</div>
+      <div class="cal-time-slot">8pm</div>
+      <div class="cal-time-slot">9pm</div>
+      <div class="cal-time-slot">10pm</div>
+    </div>
+
+    <!-- DAY 1 - Wed Apr 1 -->
+    <div class="cal-day-col">
+      <div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 9am-11am flight: top = (9-7)*48 = 96 -->
+      <div class="cal-event ev-flight" style="top:96px;height:96px;">✈️ Harry Reid Airport<br>9:00–11:00am</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 3pm check-in: top = (15-7)*48=384 -->
+      <div class="cal-event ev-hotel" style="top:384px;height:72px;">🏨 Check-in<br>Club Wyndham<br>3:00pm</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+    </div>
+
+    <!-- DAY 2 - Thu Apr 2 -->
+    <div class="cal-day-col">
+      <div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 9-10:30 Bellagio: top=96, h=72 -->
+      <div class="cal-event ev-activity" style="top:96px;height:72px;">⭐ Bellagio<br>9:00–10:30</div>
+      <!-- 10:45-12 Gallery: top=177, h=72 -->
+      <div class="cal-event ev-activity" style="top:177px;height:72px;">🖼 Gallery Fine Art<br>10:45–12:00</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 3-3:30 Fountains: top=384 h=30 -->
+      <div class="cal-event ev-activity" style="top:288px;height:30px;">⛲ Fountains 3:00</div>
+      <!-- 4-4:45 Caesars: top=432 h=45 -->
+      <div class="cal-event ev-activity" style="top:336px;height:45px;">🏛 Caesars Palace<br>4:00–4:45</div>
+      <!-- 5-6 Forum: top=480 -->
+      <div class="cal-event ev-activity" style="top:384px;height:48px;">🛍 Forum Shops<br>5:00–6:00</div>
+      <!-- 6:15-6:45 Fall Atlantis: top=540-->
+      <div class="cal-event ev-activity" style="top:444px;height:30px;">🌊 Fall of Atlantis</div>
+      <!-- 7:30-8 High Roller: top=600-->
+      <div class="cal-event ev-activity" style="top:504px;height:30px;">🎡 High Roller</div>
+      <!-- 8:30-10 Spago -->
+      <div class="cal-event ev-restaurant" style="top:552px;height:72px;">🍽 Spago<br>8:30–10:00pm</div>
+      <div class="cal-slot"></div>
+    </div>
+
+    <!-- DAY 3 - Fri Apr 3 -->
+    <div class="cal-day-col">
+      <div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 9-12 STRAT: top=96, h=144 -->
+      <div class="cal-event ev-activity" style="top:96px;height:144px;">🚀 STRAT Tower<br>9:00am–12:00pm</div>
+      <!-- 12:30-3:30 Fremont: top=264, h=144 -->
+      <div class="cal-event ev-activity" style="top:264px;height:144px;">🎆 Fremont Street<br>12:30–3:30pm</div>
+      <!-- 3:45-5 Venetian: top=420, h=72 -->
+      <div class="cal-event ev-activity" style="top:420px;height:72px;">🎰 Venetian Resort<br>3:45–5:00pm</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+    </div>
+
+    <!-- DAY 4 - Sat Apr 4 -->
+    <div class="cal-day-col">
+      <div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 9-11:30 Barrick: top=96 h=120 -->
+      <div class="cal-event ev-activity" style="top:96px;height:120px;">🖼 Barrick Museum<br>9:00–11:30am</div>
+      <!-- 12-2 Sphere: top=240 h=96 -->
+      <div class="cal-event ev-activity" style="top:240px;height:96px;">⭕ THE SPHERE<br>12:00–2:00pm</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 7-9 Vegas Show: top=480 h=96 -->
+      <div class="cal-event ev-activity" style="top:480px;height:96px;">🎭 Vegas! The Show<br>7:00–9:00pm</div>
+      <div class="cal-slot"></div>
+    </div>
+
+    <!-- DAY 5 - Sun Apr 5 -->
+    <div class="cal-day-col">
+      <div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 9-11:30 Fashion Show: top=96 h=120 -->
+      <div class="cal-event ev-activity" style="top:96px;height:120px;">👗 Fashion Show<br>9:00–11:30</div>
+      <!-- 9:30-12 Meow Wolf overlaps, show offset -->
+      <div class="cal-event ev-activity" style="top:120px;height:120px;left:50%;right:2px;">🐱 Meow Wolf<br>9:30–12:00</div>
+      <!-- 11:45-1:45 Outlets: top=225 -->
+      <div class="cal-event ev-activity" style="top:225px;height:96px;">🛍 North Outlets<br>11:45–1:45</div>
+      <!-- 2-4 Grand Canal: top=336 -->
+      <div class="cal-event ev-activity" style="top:336px;height:96px;">🚤 Grand Canal<br>2:00–4:00pm</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+    </div>
+
+    <!-- DAY 6 - Mon Apr 6 -->
+    <div class="cal-day-col">
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- Check-out 10am -->
+      <div class="cal-event ev-hotel" style="top:144px;height:48px;">🏨 Check-out<br>10:00am</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+      <!-- 4:20-5:30 airport -->
+      <div class="cal-event ev-flight" style="top:444px;height:66px;">✈️ Aeropuerto<br>4:20–5:30pm</div>
+      <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;">
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)"><div style="width:12px;height:12px;border-radius:2px;background:#FFE4E4;border-left:3px solid #CC2B2B;"></div>Vuelos</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)"><div style="width:12px;height:12px;border-radius:2px;background:#E8DEFF;border-left:3px solid #7C4DFF;"></div>Hotel</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)"><div style="width:12px;height:12px;border-radius:2px;background:#D4F4EE;border-left:3px solid #1B7A6E;"></div>Actividades</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)"><div style="width:12px;height:12px;border-radius:2px;background:#FFEFC2;border-left:3px solid #C9A84C;"></div>Restaurantes</div>
+  </div>
+</div>
+</div>
+
+<!-- ==============================
+     TAB 2: ITINERARIO
+================================ -->
+<div class="tab-section" id="tab-itinerario">
+<div class="section-wrap">
+  <h2 class="section-title">Itinerario <span>Detallado</span></h2>
+  <p class="section-subtitle">6 días · 4 personas · Club Wyndham Grand Desert</p>
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">1</div>
+      <div>
+        <div class="day-title">✈️ Llegada, Mercado & Acomodarse</div>
+        <div class="day-date">Miércoles, 1 de Abril</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>11:00am</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-vline"></div>
+          <div class="stop-name">✈️ Harry Reid International Airport</div>
+          <div class="stop-desc">Aterrizaje y recogida de equipaje. Recoger el carro de alquiler. 5757 Wayne Newton Blvd.</div>
+          <span class="stop-badge badge-flight">Vuelo de llegada</span>
+          <div class="stop-dist">📍 1.85 mi al hotel</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">3:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-name">🏨 Club Wyndham Grand Desert</div>
+          <div class="stop-desc">Check-in (disponible desde 4:00pm). 5 noches. 265 E Harmon Ave. Pool, cocina completa, vistas al Sphere.</div>
+          <span class="stop-badge badge-hotel">5 noches · Check-in 4pm</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FDF6E3;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:20px;font-size:13px;color:var(--text-muted);">
+      💡 <strong>Tip del día:</strong> Ir a Walmart o Smith's para abastecerse de snacks, desayunos y cosas para la habitación. ¡Aprovechen el resto del día para descansar y explorar los alrededores del hotel!
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">2</div>
+      <div>
+        <div class="day-title">🌟 Los Íconos del Strip: Bellagio, Caesars & High Roller</div>
+        <div class="day-date">Jueves, 2 de Abril</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>10:30am</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">⭐ Bellagio Las Vegas</div>
+          <div class="stop-desc">El casino más icónico del Strip. Admira el lobby con flores y la elegancia de MGM. 3600 S Las Vegas Blvd.</div>
+          <span class="stop-badge badge-free">Entrada libre al casino</span>
+          <div class="stop-dist">📍 0.03 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">10:45am<br>12:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🖼 Bellagio Gallery of Fine Art</div>
+          <div class="stop-desc">Exposiciones de arte de clase mundial dentro del Bellagio. Arte contemporáneo e impresionista.</div>
+          <span class="stop-badge badge-paid">💰 ~$22 p/persona</span>
+          <div class="stop-dist">📍 0.15 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">3:00<br>3:30pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">⛲ Fountains of Bellagio</div>
+          <div class="stop-desc">El espectáculo de fuentes más famoso del mundo. ¡Shows cada 30 min! Gratis desde la acera.</div>
+          <span class="stop-badge badge-free">Gratis 🆓</span>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">4:00<br>4:45pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🏛 Caesars Palace</div>
+          <div class="stop-desc">El palacio romano de Las Vegas. Explora el casino y los pasillos temáticos. 3570 S Las Vegas Blvd.</div>
+          <span class="stop-badge badge-free">Entrada libre</span>
+          <div class="stop-dist">📍 0.34 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">5:00<br>6:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🛍 The Forum Shops at Caesars</div>
+          <div class="stop-desc">Mall de lujo con techo pintado de cielo romano. Tiendas premium y arquitectura increíble.</div>
+          <span class="stop-badge badge-free">Entrada libre</span>
+          <div class="stop-dist">📍 0.12 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">6:15<br>6:45pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🌊 The Fall of Atlantis at Caesars</div>
+          <div class="stop-desc">Espectáculo animatrónico gratis dentro del Forum Shops. Neptuno, Atalantis y efectos especiales.</div>
+          <span class="stop-badge badge-free">Gratis 🆓</span>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">7:30<br>8:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🎡 High Roller</div>
+          <div class="stop-desc">La rueda de observación más alta del mundo (167m). Vistas 360° del Strip de noche. The LINQ Promenade.</div>
+          <span class="stop-badge badge-paid">💰 ~$29 p/persona</span>
+          <div class="stop-dist">📍 0.57 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">8:30<br>10:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-name">🍽 Spago</div>
+          <div class="stop-desc">Restaurante icónico de Wolfgang Puck en el Bellagio. Cocina californiana de alta gama. Reserva obligatoria.</div>
+          <span class="stop-badge badge-food">🍽️ Cena especial · Reservar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">3</div>
+      <div>
+        <div class="day-title">🚀 STRAT Tower & Vegas Clásico</div>
+        <div class="day-date">Viernes, 3 de Abril</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">9:00am<br>12:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🚀 STRAT Tower</div>
+          <div class="stop-desc">La torre más alta de Las Vegas (350m). Observatorio, atracciones de adrenalina y vistas panorámicas. 2000 Las Vegas Blvd S.</div>
+          <span class="stop-badge badge-paid">💰 ~$25 p/persona</span>
+          <div class="stop-dist">📍 2.74 mi desde hotel</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">12:30<br>3:30pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🎆 Fremont Street Experience</div>
+          <div class="stop-desc">El techo LED más grande del mundo (460m). Shows de luz cada hora, ziplining y el Vegas antiguo. Downtown Las Vegas.</div>
+          <span class="stop-badge badge-free">Gratis 🆓 (zipline extra)</span>
+          <div class="stop-dist">📍 1.75 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">3:45<br>5:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-name">🎰 Venetian Resort Las Vegas</div>
+          <div class="stop-desc">El resort más lujoso del Strip. Canales internos, arquitectura veneciana y el Gran Canal. 3355 S Las Vegas Blvd.</div>
+          <span class="stop-badge badge-free">Entrada libre</span>
+          <div class="stop-dist">📍 3.71 mi</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FDF6E3;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:20px;font-size:13px;color:var(--text-muted);">
+      💡 La tarde es libre. ¡Aprovechen para explorar el Strip o relajarse en la piscina del hotel!
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">4</div>
+      <div>
+        <div class="day-title">🖼 Arte, THE SPHERE & Vegas! The Show</div>
+        <div class="day-date">Sábado, 4 de Abril</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>11:30am</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🎨 Marjorie Barrick Museum of Art</div>
+          <div class="stop-desc">Museo de arte en la UNLV. Exposiciones rotativas de artistas locales e internacionales. 4505 S Maryland Pkwy.</div>
+          <span class="stop-badge badge-free">Gratis 🆓</span>
+          <div class="stop-dist">📍 1.11 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">12:00<br>2:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">⭕ THE SPHERE</div>
+          <div class="stop-desc">La experiencia de entretenimiento más innovadora del mundo. Pantalla LED de 160,000 ft². 255 Sands Ave. ¡Reservar con mucha anticipación!</div>
+          <span class="stop-badge badge-paid">💰 ~$99–$199 p/persona · Reservar ya</span>
+          <div class="stop-dist">📍 1.55 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">7:00<br>9:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-name">🎭 Vegas! The Show</div>
+          <div class="stop-desc">El mejor show de historia y variedades de Las Vegas. Sinatra, Elvis, Dean Martin, showgirls. 3663 S Las Vegas Blvd.</div>
+          <span class="stop-badge badge-paid">💰 ~$65 p/persona · Reservar</span>
+          <div class="stop-dist">📍 0.95 mi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">5</div>
+      <div>
+        <div class="day-title">✨ Meow Wolf & Magia de Compras</div>
+        <div class="day-date">Domingo, 5 de Abril</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>11:30am</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">👗 Fashion Show Las Vegas</div>
+          <div class="stop-desc">El mall más grande del Strip. Nordstrom, Saks, Zara y shows de moda los fines de semana. 3200 S Las Vegas Blvd.</div>
+          <span class="stop-badge badge-free">Entrada libre</span>
+          <div class="stop-dist">📍 1.46 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">9:30am<br>12:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🐱 Meow Wolf Las Vegas · Omega Mart</div>
+          <div class="stop-desc">Arte inmersivo y aventura interactiva. Un supermercado que esconde mundos paralelos. ¡Los niños la van a amar! 3215 Rancho Dr.</div>
+          <span class="stop-badge badge-paid">💰 ~$50 p/persona · Reservar</span>
+          <div class="stop-dist">📍 0.69 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">11:45am<br>1:45pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🛍 Las Vegas North Premium Outlets</div>
+          <div class="stop-desc">Más de 175 tiendas con descuentos. Coach, Michael Kors, Nike, Adidas y marcas de lujo. 875 S Grand Central Pkwy.</div>
+          <span class="stop-badge badge-free">Entrada libre</span>
+          <div class="stop-dist">📍 2.54 mi</div>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">2:00<br>4:00pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-name">🚤 Grand Canal Shoppes · Venetian Resort</div>
+          <div class="stop-desc">Canales con góndolas, tiendas boutique y restaurantes bajo un cielo pintado. ¡Paseo en góndola opcional! 3377 Las Vegas Blvd S.</div>
+          <span class="stop-badge badge-free">Entrada libre (góndola extra)</span>
+          <div class="stop-dist">📍 2.9 mi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">6</div>
+      <div>
+        <div class="day-title">🛍 Día de Compras & Regreso a Casa</div>
+        <div class="day-date">Lunes, 6 de Abril</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">10:00am</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div><div class="stop-vline"></div>
+          <div class="stop-name">🏨 Check-out Club Wyndham Grand Desert</div>
+          <div class="stop-desc">Salida antes de las 10am. Guardar maletas si es necesario. Aprovechar la mañana libre para últimas compras.</div>
+          <span class="stop-badge badge-hotel">Check-out 10am</span>
+        </div>
+      </div>
+      <div class="stop-item">
+        <div class="stop-time-col"><div class="stop-time">4:20<br>5:30pm</div></div>
+        <div class="stop-content-col">
+          <div class="stop-dot"></div>
+          <div class="stop-name">✈️ Harry Reid International Airport</div>
+          <div class="stop-desc">Llegar mínimo 2 horas antes. Devolución del carro de alquiler. ¡Hasta la próxima, Las Vegas! 5757 Wayne Newton Blvd.</div>
+          <span class="stop-badge badge-flight">Vuelo de regreso</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FDF6E3;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:20px;font-size:13px;color:var(--text-muted);">
+      💡 <strong>Tip:</strong> Lleguen al aeropuerto con al menos 2h de anticipación. El tráfico desde el Strip puede ser denso especialmente en lunes.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==============================
+     TAB 3: CHECKLIST
+================================ -->
+<div class="tab-section" id="tab-checklist">
+<div class="section-wrap">
+  <h2 class="section-title">Checklist <span>del Viaje</span></h2>
+  <p class="section-subtitle">Equipaje, actividades a reservar y cosas por comprar</p>
+
+  <div class="checklist-grid">
+
+    <!-- DOCUMENTOS Y ESENCIALES -->
+    <div class="check-card">
+      <div class="check-card-header"><span class="icon">🧳</span> Equipaje Esencial</div>
+      <div class="check-list">
+        <div class="check-section-label">📋 Documentos</div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Pasaportes y visas (todos)</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Cédula / licencia de conducir</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Confirmación del hotel (Club Wyndham)</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Tickets del vuelo (impresos o digitales)</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Seguro de viaje</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Confirmación del carro de alquiler</label></div>
+        <div class="check-divider"></div>
+        <div class="check-section-label">👔 Ropa</div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Ropa cómoda (clima primavera: 15-25°C)</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Outfit especial para cena en Spago</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Outfit para Vegas! The Show</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Zapatos cómodos para caminar</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Ropa de baño (piscina del hotel)</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Chaqueta ligera (noches frescas ~12°C)</label></div>
+        <div class="check-divider"></div>
+        <div class="check-section-label">☀️ Accesorios</div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Gafas de sol</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Protector solar SPF 50+</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Sombrero o gorra</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Cargadores y adaptadores</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Power bank</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Cámara o cel con buena cámara</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Bolsas reutilizables para compras</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Medicamentos y botiquín básico</label></div>
+        <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Snacks y meriendas para habitación</label></div>
+      </div>
+    </div>
+
+    <!-- RESERVAS Y ACTIVIDADES PAGAS -->
+    <div>
+      <div class="check-card" style="margin-bottom:24px;">
+        <div class="check-card-header" style="background:var(--red);"><span class="icon">💰</span> Actividades a Reservar & Pagar</div>
+        <div class="check-list">
+          <div class="check-section-label" style="color:var(--red);">📅 Día 2 — Jueves 2 Abr</div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">🎟 Bellagio Gallery Fine Art — ~$22 p/p</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">🎡 High Roller — ~$29 p/p (comprar en línea)</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">🍽️ Spago Wolfgang Puck — RESERVAR (cena)</label></div>
+          <div class="check-divider"></div>
+          <div class="check-section-label" style="color:var(--red);">📅 Día 3 — Viernes 3 Abr</div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">🚀 STRAT Tower — ~$25 p/p</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>🎆 Fremont Street — Gratis (zipline ~$40)</label></div>
+          <div class="check-divider"></div>
+          <div class="check-section-label" style="color:var(--red);">📅 Día 4 — Sábado 4 Abr</div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">⭕ THE SPHERE — ~$99-199 p/p · ¡Reservar ya!</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">🎭 Vegas! The Show — ~$65 p/p</label></div>
+          <div class="check-divider"></div>
+          <div class="check-section-label" style="color:var(--red);">📅 Día 5 — Domingo 5 Abr</div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label class="paid-item">🐱 Meow Wolf Omega Mart — ~$50 p/p</label></div>
+          <div class="check-divider"></div>
+          <div class="check-section-label" style="color:var(--teal);">🆓 Actividades Gratis</div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>⛲ Bellagio Fountains (show gratis)</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>🌊 Fall of Atlantis at Caesars</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>🎨 Barrick Museum of Art</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>🛍 Fashion Show Mall</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>🚤 Grand Canal Shoppes (pasear)</label></div>
+        </div>
+      </div>
+
+      <div class="check-card">
+        <div class="check-card-header" style="background:var(--teal);"><span class="icon">💳</span> Presupuesto & Dinero</div>
+        <div class="check-list">
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Tarjetas de crédito activas para USD</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Efectivo en billetes pequeños (propinas $1-5)</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><label style="color:var(--text-muted);font-size:12px;">💡 Propinas son importantes en EE.UU.: 15-20% en restaurantes, $2-5 en taxis</label></div>
+          <div class="check-divider"></div>
+          <div class="check-section-label">🛒 Comprar al Llegar</div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Ir a Walmart / Smith's para mercado</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><label style="color:var(--text-muted);font-size:12px;">🧃 Desayunos, snacks, agua, bebidas para la habitación</label></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ==============================
+     TAB 4: MAPA
+================================ -->
+<div class="tab-section" id="tab-mapa">
+<div class="section-wrap">
+  <h2 class="section-title">Mapa de <span>Ubicaciones</span></h2>
+  <p class="section-subtitle">Todos los lugares del itinerario en el mapa</p>
+
+  <div class="map-container">
+    <div id="map"></div>
+  </div>
+
+  <div class="map-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#CC2B2B;"></div>Vuelos / Aeropuerto</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7C4DFF;"></div>Hotel</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1B7A6E;"></div>Actividades & Atracciones</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#C9A84C;"></div>Restaurantes</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#E84545;"></div>Shows</div>
+  </div>
+
+  <!-- Location cards -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:32px;">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--gold);font-weight:500;margin-bottom:6px;letter-spacing:1px;">HOTEL</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">Club Wyndham Grand Desert</div>
+      <div style="font-size:12px;color:var(--text-muted);">265 E Harmon Ave · ⭐ 4.4 · 5 noches</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 2</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">Bellagio Hotel & Casino</div>
+      <div style="font-size:12px;color:var(--text-muted);">3600 S Las Vegas Blvd · ⭐ 4.7</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 2</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">Caesars Palace</div>
+      <div style="font-size:12px;color:var(--text-muted);">3570 S Las Vegas Blvd · ⭐ 4.5</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 2</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">High Roller</div>
+      <div style="font-size:12px;color:var(--text-muted);">3545 S Las Vegas Blvd · ⭐ 4.6</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 3</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">STRAT Tower</div>
+      <div style="font-size:12px;color:var(--text-muted);">2000 Las Vegas Blvd S · ⭐ 4.0</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 3</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">Fremont Street Experience</div>
+      <div style="font-size:12px;color:var(--text-muted);">Downtown Las Vegas · Gratis</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--red);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 4 · IMPERDIBLE</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">THE SPHERE</div>
+      <div style="font-size:12px;color:var(--text-muted);">255 Sands Ave · ⭐ 4.5 · 💰 Pago</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="font-size:11px;color:var(--red);font-weight:500;margin-bottom:6px;letter-spacing:1px;">DÍA 5 · IMPERDIBLE</div>
+      <div style="font-weight:500;font-size:14px;margin-bottom:4px;">Meow Wolf Omega Mart</div>
+      <div style="font-size:12px;color:var(--text-muted);">3215 Rancho Dr · ⭐ 4.4 · 💰 Pago</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Familia Juanes</strong> · Las Vegas, Abril 2026 · Juanes · Juanjo · Yali · Oscar · ¡Que lo disfruten muchísimo! 🎰✨
+</footer>
+
+<script>
+// Tab switching
+function switchTab(name) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'mapa') initMap();
+}
+
+// Checkbox toggle
+function toggleCheck(item) {
+  const cb = item.querySelector('input[type=checkbox]');
+  const label = item.querySelector('label');
+  cb.checked = !cb.checked;
+  if (cb.checked) label.classList.add('checked');
+  else label.classList.remove('checked');
+}
+
+// Google Maps
+let mapInitialized = false;
+function initMap() {
+  if (mapInitialized) return;
+  mapInitialized = true;
+  const mapEl = document.getElementById('map');
+  const center = { lat: 36.12, lng: -115.168 };
+
+  const locations = [
+    { name: "Harry Reid Airport", lat: 36.08309, lng: -115.14822, color: "#CC2B2B", day: "Día 1 & 6" },
+    { name: "Club Wyndham Grand Desert", lat: 36.10718, lng: -115.16143, color: "#7C4DFF", day: "Hotel" },
+    { name: "Bellagio Hotel & Casino", lat: 36.11295, lng: -115.17651, color: "#1B7A6E", day: "Día 2" },
+    { name: "Caesars Palace", lat: 36.11726, lng: -115.17614, color: "#1B7A6E", day: "Día 2" },
+    { name: "High Roller", lat: 36.11763, lng: -115.16829, color: "#1B7A6E", day: "Día 2" },
+    { name: "Spago (Bellagio)", lat: 36.11295, lng: -115.17651, color: "#C9A84C", day: "Día 2 · Cena" },
+    { name: "STRAT Tower", lat: 36.14751, lng: -115.15655, color: "#1B7A6E", day: "Día 3" },
+    { name: "Fremont Street Experience", lat: 36.17052, lng: -115.14365, color: "#1B7A6E", day: "Día 3" },
+    { name: "Venetian Resort", lat: 36.12117, lng: -115.16965, color: "#1B7A6E", day: "Día 3" },
+    { name: "Marjorie Barrick Museum", lat: 36.10697, lng: -115.14107, color: "#1B7A6E", day: "Día 4" },
+    { name: "THE SPHERE", lat: 36.12122, lng: -115.16204, color: "#E84545", day: "Día 4 · Show" },
+    { name: "Vegas! The Show", lat: 36.10916, lng: -115.16912, color: "#E84545", day: "Día 4 · Show" },
+    { name: "Fashion Show Las Vegas", lat: 36.12748, lng: -115.17120, color: "#1B7A6E", day: "Día 5" },
+    { name: "Meow Wolf Omega Mart", lat: 36.13246, lng: -115.18185, color: "#1B7A6E", day: "Día 5" },
+    { name: "Las Vegas North Outlets", lat: 36.16365, lng: -115.15775, color: "#1B7A6E", day: "Día 5" },
+    { name: "Grand Canal Shoppes", lat: 36.12239, lng: -115.16742, color: "#1B7A6E", day: "Día 5" },
+  ];
+
+  // Build an embedded Google Maps iframe with markers
+  const markerParams = locations.map((loc, i) => 
+    `markers=color:${encodeURIComponent(loc.color)}%7Clabel:${i+1}%7C${loc.lat},${loc.lng}`
+  ).join('&');
+
+  // Use iframe embed with static maps API style
+  const iframe = document.createElement('iframe');
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.border = 'none';
+  iframe.frameBorder = '0';
+  iframe.allowFullscreen = true;
+  
+  // Use Google Maps embed with multiple place searches
+  iframe.src = `https://www.google.com/maps/embed/v1/search?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Las+Vegas+Strip+Nevada&zoom=13`;
+  
+  mapEl.appendChild(iframe);
+
+  // Fallback: Custom SVG map
+  mapEl.innerHTML = '';
+  const mapWrapper = document.createElement('div');
+  mapWrapper.style.cssText = 'width:100%;height:100%;position:relative;background:linear-gradient(135deg,#f0ebe3 0%,#e8e0d4 100%);overflow:hidden;';
+  
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('width', '100%');
+  svg.setAttribute('height', '100%');
+  svg.setAttribute('viewBox', '0 0 800 560');
+  
+  // Background
+  const bg = document.createElementNS(svgNS, 'rect');
+  bg.setAttribute('width', '800'); bg.setAttribute('height', '560');
+  bg.setAttribute('fill', '#F5F0E8');
+  svg.appendChild(bg);
+
+  // Roads (simplified Las Vegas Strip area)
+  const roads = [
+    { d: 'M 380 20 L 350 540', stroke: '#fff', sw: 12, label: 'Las Vegas Blvd (Strip)' },
+    { d: 'M 200 280 L 600 280', stroke: '#fff', sw: 8 },
+    { d: 'M 200 200 L 600 200', stroke: '#fff', sw: 6 },
+    { d: 'M 200 360 L 600 360', stroke: '#fff', sw: 6 },
+    { d: 'M 200 160 L 600 160', stroke: '#fff', sw: 5 },
+    { d: 'M 200 440 L 600 440', stroke: '#fff', sw: 5 },
+    { d: 'M 280 20 L 280 540', stroke: '#fff', sw: 6 },
+    { d: 'M 480 20 L 480 540', stroke: '#fff', sw: 5 },
+  ];
+  roads.forEach(r => {
+    const path = document.createElementNS(svgNS, 'path');
+    path.setAttribute('d', r.d);
+    path.setAttribute('stroke', r.stroke);
+    path.setAttribute('stroke-width', r.sw);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.8');
+    svg.appendChild(path);
+  });
+
+  // Road labels
+  const roadLabel = document.createElementNS(svgNS, 'text');
+  roadLabel.setAttribute('x', '365'); roadLabel.setAttribute('y', '30');
+  roadLabel.setAttribute('font-size', '9'); roadLabel.setAttribute('fill', '#999');
+  roadLabel.setAttribute('transform', 'rotate(-90, 365, 30)');
+  roadLabel.setAttribute('text-anchor', 'middle');
+  roadLabel.textContent = 'Las Vegas Blvd';
+  svg.appendChild(roadLabel);
+
+  // Plot locations on simplified coordinate space
+  const plotLocations = [
+    { name: "✈️ Harry Reid Airport", x: 430, y: 510, color: "#CC2B2B", n: 1 },
+    { name: "🏨 Club Wyndham", x: 470, y: 380, color: "#7C4DFF", n: 2 },
+    { name: "⭐ Bellagio", x: 340, y: 300, color: "#1B7A6E", n: 3 },
+    { name: "🏛 Caesars Palace", x: 345, y: 270, color: "#1B7A6E", n: 4 },
+    { name: "🎡 High Roller", x: 370, y: 265, color: "#1B7A6E", n: 5 },
+    { name: "🚀 STRAT Tower", x: 365, y: 160, color: "#1B7A6E", n: 6 },
+    { name: "🎆 Fremont Street", x: 375, y: 80, color: "#1B7A6E", n: 7 },
+    { name: "🎰 Venetian", x: 355, y: 255, color: "#1B7A6E", n: 8 },
+    { name: "🎨 Barrick Museum", x: 490, y: 385, color: "#1B7A6E", n: 9 },
+    { name: "⭕ SPHERE", x: 420, y: 255, color: "#E84545", n: 10 },
+    { name: "🎭 Vegas! Show", x: 390, y: 340, color: "#E84545", n: 11 },
+    { name: "👗 Fashion Show", x: 348, y: 230, color: "#1B7A6E", n: 12 },
+    { name: "🐱 Meow Wolf", x: 270, y: 210, color: "#C9A84C", n: 13 },
+    { name: "🛍 N. Outlets", x: 360, y: 110, color: "#1B7A6E", n: 14 },
+    { name: "🚤 Grand Canal", x: 355, y: 250, color: "#1B7A6E", n: 15 },
+    { name: "🍽 Spago", x: 340, y: 305, color: "#C9A84C", n: 16 },
+  ];
+
+  plotLocations.forEach(loc => {
+    // Pin circle
+    const g = document.createElementNS(svgNS, 'g');
+    g.style.cursor = 'pointer';
+    
+    const circle = document.createElementNS(svgNS, 'circle');
+    circle.setAttribute('cx', loc.x); circle.setAttribute('cy', loc.y);
+    circle.setAttribute('r', '12');
+    circle.setAttribute('fill', loc.color);
+    circle.setAttribute('stroke', '#fff');
+    circle.setAttribute('stroke-width', '2');
+    g.appendChild(circle);
+
+    const numText = document.createElementNS(svgNS, 'text');
+    numText.setAttribute('x', loc.x); numText.setAttribute('y', loc.y + 4);
+    numText.setAttribute('text-anchor', 'middle');
+    numText.setAttribute('font-size', '9');
+    numText.setAttribute('font-weight', '700');
+    numText.setAttribute('fill', '#fff');
+    numText.textContent = loc.n;
+    g.appendChild(numText);
+
+    // Label
+    const label = document.createElementNS(svgNS, 'text');
+    const lx = loc.x + (loc.x < 400 ? -16 : 16);
+    label.setAttribute('x', lx);
+    label.setAttribute('y', loc.y + 4);
+    label.setAttribute('text-anchor', loc.x < 400 ? 'end' : 'start');
+    label.setAttribute('font-size', '9.5');
+    label.setAttribute('font-weight', '500');
+    label.setAttribute('fill', '#333');
+    label.textContent = loc.name;
+    g.appendChild(label);
+
+    svg.appendChild(g);
+  });
+
+  // Title
+  const title = document.createElementNS(svgNS, 'text');
+  title.setAttribute('x', '20'); title.setAttribute('y', '30');
+  title.setAttribute('font-size', '14'); title.setAttribute('font-weight', '700');
+  title.setAttribute('fill', '#1A1410');
+  title.textContent = 'Las Vegas — Familia Juanes 2026';
+  svg.appendChild(title);
+
+  mapWrapper.appendChild(svg);
+  mapEl.appendChild(mapWrapper);
+
+  // Add Google Maps link
+  const gmLink = document.createElement('a');
+  gmLink.href = 'https://www.google.com/maps/search/Las+Vegas+NV/@36.12,-115.17,14z';
+  gmLink.target = '_blank';
+  gmLink.style.cssText = 'display:block;margin-top:12px;color:var(--teal);font-size:13px;text-decoration:none;font-weight:500;';
+  gmLink.innerHTML = '🗺️ Abrir mapa completo en Google Maps →';
+  document.getElementById('tab-mapa').querySelector('.section-wrap').appendChild(gmLink);
+}
+</script>
+
+</body>
+</html>
